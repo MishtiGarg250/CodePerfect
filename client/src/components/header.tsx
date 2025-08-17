@@ -41,7 +41,7 @@ export default function Header() {
   const activeItem = getActiveItem()
 
   const handleSignOut = () => {
-    localStorage.clear();
+    localStorage.removeItem("auth");
     navigate("/login")
   }
 
