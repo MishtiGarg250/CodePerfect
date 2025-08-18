@@ -114,7 +114,7 @@ export default function Header() {
                   Login
                 </Button>
                 <Button
-                  onClick={() => navigate("/register")}
+                  onClick={() => navigate("/signup")}
                   className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 transform hover:scale-105 shadow-lg rounded-full px-6"
                 >
                   Sign up
@@ -198,7 +198,7 @@ export default function Header() {
                 <div className="flex-1">
                   <Button
                     onClick={() => {
-                      navigate("/register")
+                      navigate("/signup")
                       setIsMobileMenuOpen(false)
                     }}
                     className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 shadow-lg rounded-full py-3"
