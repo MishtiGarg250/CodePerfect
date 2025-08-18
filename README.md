@@ -9,8 +9,6 @@ A full-stack platform for coding practice, progress tracking, and daily logs.
 <img width="1897" height="842" alt="Screenshot 2025-08-17 230758" src="https://github.com/user-attachments/assets/f4cd43b0-6b81-45eb-a0bc-ca2a220adaca" />
 <img width="1899" height="840" alt="Screenshot 2025-08-17 230809" src="https://github.com/user-attachments/assets/47227701-8fc5-40da-886a-29bcad444cfd" />
 
->>>>>>> f7e39ea1a8f4c5078290a1723d1d0adb466253e9
-
 ## Project Overview
 CodePerfect is a web application that allows users to:
 - Practice coding problems by category and difficulty
