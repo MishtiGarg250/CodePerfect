@@ -1,8 +1,8 @@
 
 import { useEffect, useState, useRef } from "react"
+import { useVoicePagination } from "@/useVoicePagination"
 import { useSearchParams } from "react-router-dom"
 import { useTheme } from "@/components/theme-provider"
-import {useVoicePagination} from "@/useVoicePagination"
 import { api } from "@/api/api"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -30,14 +30,17 @@ export default function Problems() {
   const [loading, setLoading] = useState(true)
   const [difficulty, setDifficulty] = useState("all")
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const { theme } = useTheme();
+  
   const PAGE_SIZE = 5;
   const limitOptions = [5, 10, 15];
 
-const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+
   const searchTerm = searchParams.get("search") || "";
   const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
+  const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+
   // For category pagination
   const page = parseInt(searchParams.get("page") || "1", 10);
   const limit = parseInt(searchParams.get("limit") || PAGE_SIZE.toString(), 10);
@@ -58,7 +61,7 @@ const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
       setLoading(true)
       try {
         //fetching all categories, filter on frontend
-        const res = await api.get(`/content/getContent`, { headers: { "Cache-Control": "no-cache" } });
+        const res = await api.get(`/content/getContent`);
         setCategories(res.data || []);
       } catch {
         setCategories([]);
@@ -69,6 +72,45 @@ const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
     fetchCategories();
   }, []);
 
+  // Filter and paginate categories (accordions) on frontend
+  const filteredCategories = categories
+    .map((cat) => ({
+      ...cat,
+      questions: cat.questions.filter((q) => {
+        const matchesSearch = debouncedSearch === "" || q.title.toLowerCase().includes(debouncedSearch.toLowerCase());
+        const matchesDifficulty = difficulty === "all" || (q.difficulty && q.difficulty.toLowerCase() === difficulty);
+        return matchesSearch && matchesDifficulty;
+      })
+    }))
+    .filter((cat) => cat.questions.length > 0);
+
+
+  const totalPages = Math.ceil(filteredCategories.length / limit) || 1;
+  const paginatedCategories = filteredCategories.slice((page - 1) * limit, page * limit);
+
+  
+  useVoicePagination(page, (n) => {
+    setSearchParams(params => {
+      params.set("page", n.toString());
+      params.set("search", searchTerm);
+      params.set("limit", limit.toString());
+      if (difficulty && difficulty !== "all") params.set("difficulty", difficulty);
+      return params;
+    });
+  }, totalPages, (msg) => alert(msg));
+
+  
+  //Mock data just to show on ui
+  const featuredCategories = [
+    { name: "Arrays", icon: Code, color: "bg-blue-500", problems: 45, description: "Arrays are fundamental data structures for storing elements. Practice array manipulation, searching, sorting, and more." },
+    { name: "Algorithms", icon: Network, color: "bg-green-500", problems: 32, description: "Algorithm problems cover searching, sorting, dynamic programming, and more. Improve your problem-solving skills!" },
+    { name: "Database", icon: Database, color: "bg-purple-500", problems: 28, description: "Database problems test your knowledge of SQL, schema design, and data manipulation." },
+    { name: "Tree", icon: TreePine, color: "bg-orange-500", problems: 24, description: "Tree problems include traversals, binary trees, BSTs, and more. Essential for coding interviews." },
+  ];
+
+
+
+  
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       const tooltip = document.getElementById("featured-tooltip");
@@ -83,40 +125,8 @@ const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
     }
     return () => document.removeEventListener("mousedown", handleClick);
   }, [activeTooltip]);
- 
-  // Filter and paginate categories (accordions) on frontend
-  const filteredCategories = categories
-    .map((cat) => ({
-      ...cat,
-      questions: cat.questions.filter((q) => {
-        const matchesSearch = debouncedSearch === "" || q.title.toLowerCase().includes(debouncedSearch.toLowerCase());
-        const matchesDifficulty = difficulty === "all" || (q.difficulty && q.difficulty.toLowerCase() === difficulty);
-        return matchesSearch && matchesDifficulty;
-      })
-    }))
-    .filter((cat) => cat.questions.length > 0);
 
-  const totalPages = Math.ceil(filteredCategories.length / limit) || 1;
-  const paginatedCategories = filteredCategories.slice((page - 1) * limit, page * limit);
 
-   useVoicePagination(page, (n) => {
-    setSearchParams(params => {
-      params.set("page", n.toString());
-      params.set("search", searchTerm);
-      params.set("limit", limit.toString());
-      if (difficulty && difficulty !== "all") params.set("difficulty", difficulty);
-      return params;
-    });
-  }, totalPages, (msg) => alert(msg));
-  //Mock data just to show on ui
-  const featuredCategories = [
-    { name: "Arrays", icon: Code, color: "bg-blue-500", problems: 45, description: "Arrays are fundamental data structures for storing elements. Practice array manipulation, searching, sorting, and more." },
-    { name: "Algorithms", icon: Network, color: "bg-green-500", problems: 32, description: "Algorithm problems cover searching, sorting, dynamic programming, and more. Improve your problem-solving skills!" },
-    { name: "Database", icon: Database, color: "bg-purple-500", problems: 28, description: "Database problems test your knowledge of SQL, schema design, and data manipulation." },
-    { name: "Tree", icon: TreePine, color: "bg-orange-500", problems: 24, description: "Tree problems include traversals, binary trees, BSTs, and more. Essential for coding interviews." },
-  ];
-
-  const { theme } = useTheme();
 
 
   const chevronClass = theme === "dark" 
@@ -135,27 +145,29 @@ const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
           <h2 className="text-xl font-semibold mb-4">Featured Problem Categories</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {featuredCategories.map((category) => {
-              const IconComponent = category.icon
+              const IconComponent = category.icon;
+              const isActive = activeTooltip === category.name;
               return (
-                <Card
-                  key={category.name}
-                  className="bg-card border border-border hover:shadow-lg transition-all cursor-pointer group"
-                >
-                  <CardContent className="p-4">
-                    <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-lg ${category.color}`}>
-                        <IconComponent className="h-5 w-5 text-white" />
+                <div key={category.name} className="relative">
+                  <Card
+                    className="bg-card border border-border hover:shadow-lg transition-all cursor-pointer group"
+                    onClick={() => setActiveTooltip(isActive ? null : category.name)}
+                  >
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2 rounded-lg ${category.color}`}>
+                          <IconComponent className="h-5 w-5 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+                            {category.name}
+                          </h3>
+                          <p className="text-sm text-muted-foreground">{category.problems} problems</p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="font-semibold group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
-                          {category.name}
-                        </h3>
-                        <p className="text-sm text-muted-foreground">{category.problems} problems</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-                {isActive && (
+                    </CardContent>
+                  </Card>
+                  {isActive && (
                     <div
                       id="featured-tooltip"
                       className={`absolute left-1/2 -translate-x-1/2 top-full mt-2 z-20 text-white text-xs px-4 py-2 rounded shadow-lg w-64 text-center animate-fade-in ${category.color}`}
@@ -163,7 +175,8 @@ const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
                       {category.description}
                     </div>
                   )}
-              )
+                </div>
+              );
             })}
           </div>
         </div>
