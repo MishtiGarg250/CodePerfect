@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef } from "react"
 import { useSearchParams } from "react-router-dom"
 import { useTheme } from "@/components/theme-provider"
+import {useVoicePagination} from "@/useVoicePagination"
 import { api } from "@/api/api"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -214,7 +215,14 @@ export default function Problems() {
           </CardContent>
         </Card>
 
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center mt-8 flex-col items-center gap-2">
+          <button
+            type="button"
+            className="mb-2 px-4 py-2 rounded bg-teal-600 text-white hover:bg-teal-700 transition"
+            onClick={() => (window as any).startPaginationVoice?.()}
+          >
+            Hey! I will help you in going to next page, just stay whether you want to go next or prev.
+          </button>
           <div className="flex gap-2 bg-card dark:bg-card p-2 rounded-xl shadow border border-border">
             <Button
               variant="outline"
