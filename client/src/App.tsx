@@ -36,7 +36,7 @@ function ConditionalHeader() {
 
 const App = () => (
   <TooltipProvider>
-    <ThemeProvider defaultTheme="system" storageKey="leetcode-theme">
+    <ThemeProvider defaultTheme="dark" storageKey="leetcode-theme">
       <BrowserRouter>
         <ConditionalHeader />
       </BrowserRouter>
