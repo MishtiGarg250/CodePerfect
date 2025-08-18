@@ -51,7 +51,7 @@ export default function Register() {
         <CardHeader className="text-center space-y-4">
           
           <div>
-            <CardTitle className="text-3xl font-bold bg-gradient-to-r from-teal-600 via-teal-500 to-teal-400 bg-clip-text text-transparent">
+            <CardTitle className="font-bold text-3xl font-bold bg-gradient-to-r from-teal-600 via-teal-500 to-teal-400 bg-clip-text text-transparent">
               <span className="bg-primary to-secondary text-transparent bg-clip-text group-hover:from-primary/80 group-hover:to-secondary/80 transition-all duration-300 font-bold">
                     CODE
                   </span>
@@ -60,7 +60,7 @@ export default function Register() {
                     PERFECT
                   </span>
             </CardTitle>
-            <CardDescription className="text-base mt-2">Create your account to start coding</CardDescription>
+            <CardDescription className="text-base mt-2">Create your account to explore problems</CardDescription>
           </div>
         </CardHeader>
 
