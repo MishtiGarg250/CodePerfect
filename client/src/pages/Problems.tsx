@@ -34,7 +34,7 @@ export default function Problems() {
   const PAGE_SIZE = 5;
   const limitOptions = [5, 10, 15];
 
-
+const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
   const searchTerm = searchParams.get("search") || "";
   const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -68,6 +68,21 @@ export default function Problems() {
     }
     fetchCategories();
   }, []);
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      const tooltip = document.getElementById("featured-tooltip");
+      if (tooltip && !tooltip.contains(e.target as Node)) {
+        setActiveTooltip(null);
+      }
+    }
+    if (activeTooltip) {
+      document.addEventListener("mousedown", handleClick);
+    } else {
+      document.removeEventListener("mousedown", handleClick);
+    }
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [activeTooltip]);
  
   // Filter and paginate categories (accordions) on frontend
   const filteredCategories = categories
@@ -95,11 +110,11 @@ export default function Problems() {
   }, totalPages, (msg) => alert(msg));
   //Mock data just to show on ui
   const featuredCategories = [
-    { name: "Arrays", icon: Code, color: "bg-blue-500", problems: 45 },
-    { name: "Algorithms", icon: Network, color: "bg-green-500", problems: 32 },
-    { name: "Database", icon: Database, color: "bg-purple-500", problems: 28 },
-    { name: "Tree", icon: TreePine, color: "bg-orange-500", problems: 24 },
-  ]
+    { name: "Arrays", icon: Code, color: "bg-blue-500", problems: 45, description: "Arrays are fundamental data structures for storing elements. Practice array manipulation, searching, sorting, and more." },
+    { name: "Algorithms", icon: Network, color: "bg-green-500", problems: 32, description: "Algorithm problems cover searching, sorting, dynamic programming, and more. Improve your problem-solving skills!" },
+    { name: "Database", icon: Database, color: "bg-purple-500", problems: 28, description: "Database problems test your knowledge of SQL, schema design, and data manipulation." },
+    { name: "Tree", icon: TreePine, color: "bg-orange-500", problems: 24, description: "Tree problems include traversals, binary trees, BSTs, and more. Essential for coding interviews." },
+  ];
 
   const { theme } = useTheme();
 
@@ -140,6 +155,14 @@ export default function Problems() {
                     </div>
                   </CardContent>
                 </Card>
+                {isActive && (
+                    <div
+                      id="featured-tooltip"
+                      className={`absolute left-1/2 -translate-x-1/2 top-full mt-2 z-20 text-white text-xs px-4 py-2 rounded shadow-lg w-64 text-center animate-fade-in ${category.color}`}
+                    >
+                      {category.description}
+                    </div>
+                  )}
               )
             })}
           </div>
