@@ -2,7 +2,6 @@
 
 A full-stack platform for coding practice, progress tracking, and daily logs. 
 
-=======
 ## Some Glimpses
 <img width="1900" height="845" alt="Screenshot 2025-08-17 230745" src="https://github.com/user-attachments/assets/b9f68b58-bb60-477d-914f-4b99304685d7" />
 <img width="1899" height="847" alt="image" src="https://github.com/user-attachments/assets/a69fc818-159b-42ac-8f69-7beaaf77b904" />
