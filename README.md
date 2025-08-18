@@ -16,6 +16,9 @@ CodePerfect is a web application that allows users to:
 - Track progress and daily activity
 - Authenticate securely (login/register)
 - Enjoy a modern, responsive UI
+- see their daily summaries of progress and give recommendations as well
+- allows user to see their last 7 day logs
+- navigate to different problem pages with their voice
 
 ## Features
 - **Frontend:** React (TypeScript), Vite, Tailwind CSS
