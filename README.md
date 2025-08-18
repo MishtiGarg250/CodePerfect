@@ -87,9 +87,10 @@ client/
     components/
     pages/
     api/
-    contexts/
-    App.js/ts
-    index.js/ts
+    useVoicePagination.ts
+    main.tsx
+    App.tsx
+    index.html
     ...
   public/
   ...
