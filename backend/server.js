@@ -11,7 +11,21 @@ import userRoutes from "./routes/userRoutes.js";
 dotenv.config();
 const app = express();
 
-app.use(cors());
+const allowedOrigins = [
+  "https://code-perfect.vercel.app", 
+  "http://localhost:3000"            
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true, // if you're using cookies or auth headers
+}));
 app.use(express.json());
 app.use(morgan("dev"));
 
