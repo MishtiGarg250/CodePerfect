@@ -38,7 +38,7 @@ CodePerfect is a web application that allows users to:
 ### Installation
 1. Clone the repository:
    ```sh
-   git clone <repo-url>
+   git clone "https://github.com/MishtiGarg250/CodePerfect"
    cd CodePerfect
    ```
 2. Install backend dependencies:
