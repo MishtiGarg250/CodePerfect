@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Link } from "react-router-dom"
-import { Code, Trophy, Users, Zap } from "lucide-react"
+import { LoaderCircle,Code, MessageCircleCode,ClipboardClock} from "lucide-react"
 
 export default function Landing(){
   return (
@@ -17,21 +17,21 @@ export default function Landing(){
       <div className="container mx-auto px-4 py-16">
   {/* Hero Section */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary-foreground bg-clip-text text-transparent">
-            Master Coding with <span className="bg-primary bg-clip-text group-hover:from-primary/80 group-hover:to-secondary/80 transition-all duration-300 font-bold">
-                    CODE
-                  </span>
-                  <span className="text-foreground group-hover:text-foreground/80 transition-colors duration-300 font-bold">
-                    {" "}
-                    PERFECT
-                  </span>
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+            <span className="font-mono text-primary tracking-wider">CODE</span>
+            <span className="text-foreground ml-4">PERFECT</span>
           </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Sharpen your programming skills with our curated collection of coding challenges. Practice, learn, and excel
-            in your coding journey.
-          </p>
+
+          {/* Subheading with context */}
+          <div className="space-y-4 mb-12">
+            <p className="text-xl md:text-2xl text-muted-foreground font-medium">Master coding with precision andprogress</p>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              With CodePerfect, you can mark problems as complete, save bookmarks, and track your progress easily. 
+    Daily logs, summaries, and AI-powered recommendations keep your learning structured and focused..
+            </p>
+          </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-teal-600 hover:bg-teal-700 font-secondary">
+            <Button asChild size="lg" className="bg-teal-600 font-secondary">
               <Link to="/problems">Start Solving</Link>
             </Button>
             <Button
@@ -61,7 +61,7 @@ export default function Landing(){
 
           <Card className="text-center bg-card/80 backdrop-blur-sm border-border/50 hover:shadow-lg transition-all">
             <CardHeader>
-              <Trophy className="h-12 w-12 mx-auto text-teal-600 mb-4" />
+              <LoaderCircle className="h-12 w-12 mx-auto text-teal-600 mb-4" />
               <CardTitle className="text-foreground">Track Progress</CardTitle>
             </CardHeader>
             <CardContent>
@@ -73,7 +73,7 @@ export default function Landing(){
 
           <Card className="text-center bg-card/80 backdrop-blur-sm border-border/50 hover:shadow-lg transition-all">
             <CardHeader>
-              <Users className="h-12 w-12 mx-auto text-teal-600 mb-4" />
+              <MessageCircleCode className="h-12 w-12 mx-auto text-teal-600 mb-4" />
               <CardTitle className="text-foreground">Recommendations</CardTitle>
             </CardHeader>
             <CardContent>
@@ -85,7 +85,7 @@ export default function Landing(){
 
           <Card className="text-center bg-card/80 backdrop-blur-sm border-border/50 hover:shadow-lg transition-all">
             <CardHeader>
-              <Zap className="h-12 w-12 mx-auto text-teal-600 mb-4" />
+              <ClipboardClock className="h-12 w-12 mx-auto text-teal-600 mb-4" />
               <CardTitle className="text-foreground">Real-time Feedback</CardTitle>
             </CardHeader>
             <CardContent>
@@ -110,5 +110,7 @@ export default function Landing(){
   )
 
 }
+
+  
 
   
