@@ -53,7 +53,7 @@ export default function Header() {
           <div className="flex items-center gap-6">
             <Link to="/" className="flex items-center space-x-3 group cursor-pointer">
               <div className="hidden sm:block">
-                <span className="text-[16px] tracking-tight group-hover:scale-105 transition-transform duration-300">
+                <span className="font-mono text-[16px] tracking-tight group-hover:scale-105 transition-transform duration-300">
                   <span className="bg-gradient-to-r from-primary to-primary text-transparent bg-clip-text group-hover:from-primary/80 group-hover:to-secondary/80 transition-all duration-300 font-bold">
                     CODE
                   </span>
