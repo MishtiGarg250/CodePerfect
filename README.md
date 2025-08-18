@@ -1,10 +1,9 @@
 # CodePerfect
 
-A full-stack LeetCode-like platform for coding practice, progress tracking, and daily logs. 
-Future scope is to integrate ide and judge api and other things as well to make sure it can be called as leetcode clone.
-<<<<<<< HEAD
+A full-stack platform for coding practice, progress tracking, and daily logs. 
+
 =======
-## some Glimpses
+## Some Glimpses
 <img width="1900" height="845" alt="Screenshot 2025-08-17 230745" src="https://github.com/user-attachments/assets/b9f68b58-bb60-477d-914f-4b99304685d7" />
 <img width="1899" height="847" alt="image" src="https://github.com/user-attachments/assets/a69fc818-159b-42ac-8f69-7beaaf77b904" />
 <img width="1899" height="852" alt="Screenshot 2025-08-17 230918" src="https://github.com/user-attachments/assets/915b6aa7-dcb0-45d0-a1f5-c3457f313b66" />
