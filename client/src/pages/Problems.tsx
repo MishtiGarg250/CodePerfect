@@ -68,7 +68,7 @@ export default function Problems() {
     }
     fetchCategories();
   }, []);
-
+ 
   // Filter and paginate categories (accordions) on frontend
   const filteredCategories = categories
     .map((cat) => ({
@@ -84,7 +84,15 @@ export default function Problems() {
   const totalPages = Math.ceil(filteredCategories.length / limit) || 1;
   const paginatedCategories = filteredCategories.slice((page - 1) * limit, page * limit);
 
-  
+   useVoicePagination(page, (n) => {
+    setSearchParams(params => {
+      params.set("page", n.toString());
+      params.set("search", searchTerm);
+      params.set("limit", limit.toString());
+      if (difficulty && difficulty !== "all") params.set("difficulty", difficulty);
+      return params;
+    });
+  }, totalPages, (msg) => alert(msg));
   //Mock data just to show on ui
   const featuredCategories = [
     { name: "Arrays", icon: Code, color: "bg-blue-500", problems: 45 },
