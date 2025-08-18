@@ -33,7 +33,7 @@ export default function Problems() {
   const PAGE_SIZE = 5;
   const limitOptions = [5, 10, 15];
 
-  // Read from URL or default
+
   const searchTerm = searchParams.get("search") || "";
   const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -94,8 +94,8 @@ export default function Problems() {
 
   const { theme } = useTheme();
 
-  // Helper for chevron icon color
-  const chevronClass = theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches)
+
+  const chevronClass = theme === "dark" 
     ? "text-yellow-400"
     : "text-primary";
 

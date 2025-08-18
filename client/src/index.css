@@ -16,6 +16,7 @@
   transform: translateY(16px);
   animation: fadeInUp 0.5s forwards;
 }
+
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -71,78 +72,7 @@
   }
 }
 
-.difficulty-easy {
-  background-color: hsl(173 80% 40%);
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.375rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
 
-.difficulty-medium {
-  background-color: hsl(173 70% 35%);
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.375rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.difficulty-hard {
-  background-color: hsl(173 60% 30%);
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.375rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-/* Converted @apply to CSS properties for status indicators */
-.status-solved {
-  background-color: hsl(173 80% 40%);
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.375rem;
-  font-size: 0.75rem;
-}
-
-.status-attempted {
-  background-color: hsl(173 80% 50%);
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.375rem;
-  font-size: 0.75rem;
-}
-
-.status-locked {
-  background-color: hsl(220 8.9% 46.1%);
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.375rem;
-  font-size: 0.75rem;
-}
-
-/* Converted @apply to CSS properties for enhanced form styling */
-.light-form-input {
-  background-color: hsl(210 40% 98%);
-  border: 1px solid hsl(214.3 31.8% 91.4%);
-  color: hsl(222.2 84% 4.9%);
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.375rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.light-form-input::placeholder {
-  color: hsl(215.4 16.3% 46.9%);
-}
-
-.light-form-input:focus {
-  /* Removed global button styles to allow theme-aware Tailwind classes to take effect */
-.social-button-dark:hover {
-  background-color: hsl(215 20.2% 65.1%);
-}
-}
 
 
 @theme inline {

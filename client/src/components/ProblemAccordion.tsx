@@ -62,13 +62,15 @@ export default function ProblemAccordion({ categories }: ProblemAccordionProps) 
   async function handleComplete(questionId: string) {
     try {
       const completedNow = !isCompleted(questionId);
-      const res = await api.post(`/user/updateProgress`, { questionId, completed: completedNow });
-      // res.data.progress is the updated array of completed question IDs
-      if (res.data && Array.isArray(res.data.progress)) {
-        setCompleted(Object.fromEntries(res.data.progress.map((id: string) => [id, true])));
-      }
+      setCompleted((prev) => ({
+      ...prev,
+      [questionId]: completedNow,
+    }));
+    await api.post(`/user/updateProgress`, { questionId, completed: completedNow });
+     
     } catch(err){
       console.log(err)
+      
     }
   }
 
@@ -151,13 +153,13 @@ export default function ProblemAccordion({ categories }: ProblemAccordionProps) 
                           </a>
                         )}
                         <button onClick={() => handleBookmark(question._id)}
-                          className={`ml-2 px-2 py-1 border rounded text-xs flex items-center hover:bg-yellow-100 ${isBookmarked(question._id) ? 'bg-yellow-100' : ''}`}
+                          className={`ml-2 px-2 py-1 border rounded text-s flex items-center hover:bg-yellow-100 ${isBookmarked(question._id) ? 'bg-yellow-100' : ''}`}
                           aria-label="Bookmark"
                         >
                           <Bookmark className={`w-4 h-4 ${isBookmarked(question._id) ? 'text-yellow-500' : ''}`} />
                         </button>
                         <button onClick={() => handleComplete(question._id)}
-                          className={`ml-2 px-2 py-1 border rounded text-xs flex items-center hover:bg-green-100 ${isCompleted(question._id) ? 'bg-green-100' : ''}`}
+                          className={`ml-2 px-2 py-1 border rounded text-s flex items-center hover:bg-green-100 ${isCompleted(question._id) ? 'bg-green-100' : ''}`}
                           aria-label="Complete"
                         >
                           <BookmarkCheck className={`w-4 h-4 ${isCompleted(question._id) ? 'text-green-500' : ''}`} />

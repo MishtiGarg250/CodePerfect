@@ -14,7 +14,7 @@ export function ThemeToggle() {
 
   let icon = <Sun className="h-[1.2rem] w-[1.2rem] text-yellow-500 transition-all" />
   if (mounted) {
-    if (theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+    if (theme === "dark") {
       icon = <Moon className="h-[1.2rem] w-[1.2rem] text-blue-400 transition-all" />
     } else {
       icon = <Sun className="h-[1.2rem] w-[1.2rem] text-yellow-500 transition-all" />
@@ -45,12 +45,6 @@ export function ThemeToggle() {
           className="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground dark:hover:bg-accent dark:hover:text-accent-foreground dark:focus:bg-accent dark:focus:text-accent-foreground"
         >
           Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => setTheme("system")}
-          className="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground dark:hover:bg-accent dark:hover:text-accent-foreground dark:focus:bg-accent dark:focus:text-accent-foreground"
-        >
-          System
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
