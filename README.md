@@ -2,7 +2,7 @@
 
 A full-stack platform for coding practice, progress tracking, and daily logs. 
 
-### live link : https://code-perfect.vercel.app/
+#### live link : https://code-perfect.vercel.app/
 
 <img width="1700" height="800" alt="image" src="https://github.com/user-attachments/assets/5108cdba-fd47-47cd-99fe-0c4b660e6daf" />
 
